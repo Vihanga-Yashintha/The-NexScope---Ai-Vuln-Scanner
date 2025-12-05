@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Scan Report - {{ scan.target or "Unknown" }}</title>
+  <style>
+    /* --- Page sizing --- */
+    @page { size: A4; margin: 18mm 16mm; }
+    
+    html, body { 
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; 
+      color: #FFFFFF; 
+      background: #1E1E1E;
+      font-size: 12px; 
+      margin: 0; 
+      padding: 0;
+      line-height: 1.6;
+    }
+    
+    .page { 
+      width: 100%; 
+      box-sizing: border-box; 
+      padding: 20px;
+      background: linear-gradient(135deg, #1E1E1E 0%, #2B2B2B 100%);
+    }
+
+    /* --- Print Button --- */
+    .print-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #00C853 0%, #009624 100%);
+      color: #FFFFFF;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 200, 83, 0.4);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .print-button:hover {
+      background: linear-gradient(135deg, #009624 0%, #006619 100%);
+      box-shadow: 0 6px 16px rgba(0, 200, 83, 0.6);
+      transform: translateY(-2px);
+    }
+    
+    .print-button:active {
+      transform: translateY(0);
+    }
+    
+    @media print {
+      .print-button {
+        display: none !important;
+      }
+      
+      /* Force colors and backgrounds in print */
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
+      
+      body {
+        background: #1E1E1E !important;
+      }
+      
+      .page {
+        background: linear-gradient(135deg, #1E1E1E 0%, #2B2B2B 100%) !important;
+      }
+      
+      header {
+        background: linear-gradient(135deg, #009624 0%, #006619 100%) !important;
+      }
+      
+      .card {
+        background: linear-gradient(135deg, #2B2B2B 0%, #323232 100%) !important;
+        border-color: #404040 !important;
+      }
+      
+      .summary-card {
+        border-color: #00C853 !important;
+      }
+      
+      th {
+        background: linear-gradient(135deg, #009624 0%, #006619 100%) !important;
+      }
+      
+      td {
+        background: #2B2B2B !important;
+      }
+      
+      h2, h3 {
+        color: #00C853 !important;
+      }
+      
+      .cve-id {
+        color: #E53935 !important;
+      }
+      
+      .cvss-critical {
+        background: #E53935 !important;
+        color: #FFFFFF !important;
+      }
+      
+      .cvss-high {
+        background: #FFA726 !important;
+        color: #1E1E1E !important;
+      }
+      
+      .cvss-medium {
+        background: #FFD54F !important;
+        color: #1E1E1E !important;
+      }
+      
+      .cvss-low {
+        background: #00C853 !important;
+        color: #FFFFFF !important;
+      }
+      
+      .badge-primary {
+        background: linear-gradient(135deg, #009624 0%, #006619 100%) !important;
+      }
+      
+      .label-probs {
+        background: #1E1E1E !important;
+        border-color: #00C853 !important;
+      }
+      
+      pre {
+        background: #1E1E1E !important;
+        color: #00C853 !important;
+        border-color: #404040 !important;
+      }
+      
+      footer {
+        border-color: #00C853 !important;
+      }
+    }
+
+    /* --- Header --- */
+    header { 
+      background: linear-gradient(135deg, #009624 0%, #006619 100%);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0, 150, 36, 0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .brand { 
+      font-size: 24px; 
+      font-weight: 700; 
+      color: #FFFFFF;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      letter-spacing: 0.5px;
+    }
+    
+    .brand-subtitle {
+      font-size: 12px;
+      color: #E3F2FD;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+    
+    .meta { 
+      text-align: right; 
+      font-size: 11px; 
+      color: #E3F2FD;
+      background: rgba(255,255,255,0.1);
+      padding: 12px 16px;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .meta strong {
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    /* --- Summary Section --- */
+    .summary-card {
+      background: linear-gradient(135deg, #2B2B2B 0%, #323232 100%);
+      border: 1px solid #00C853;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .summary-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    /* --- Columns --- */
+    .row { 
+      display: flex; 
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .col-2 { flex: 0 0 55%; }
+    .col-1 { flex: 1; }
+
+    /* --- Cards --- */
+    .card { 
+      background: linear-gradient(135deg, #2B2B2B 0%, #323232 100%);
+      border: 1px solid #404040;
+      border-radius: 12px;
+      padding: 20px;
+      box-sizing: border-box;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      margin-bottom: 16px;
+    }
+    
+    h2 { 
+      font-size: 18px; 
+      margin: 0 0 12px; 
+      color: #00C853;
+      font-weight: 600;
+      border-bottom: 2px solid #00C853;
+      padding-bottom: 8px;
+    }
+    
+    h3 { 
+      font-size: 14px; 
+      margin: 0 0 12px; 
+      color: #00C853;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    
+    h3::before {
+      content: "▸";
+      margin-right: 8px;
+      color: #00C853;
+    }
+
+    /* --- Tables --- */
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      font-size: 11px;
+      background: #1E1E1E;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    th, td { 
+      padding: 10px 12px; 
+      border: 1px solid #404040;
+      vertical-align: top;
+    }
+    
+    th { 
+      background: linear-gradient(135deg, #009624 0%, #006619 100%);
+      text-align: left; 
+      font-weight: 600;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+    }
+    
+    td {
+      color: #AFAFAF;
+      background: #2B2B2B;
+    }
+    
+    tbody tr:hover td {
+      background: #323232;
+    }
+
+    /* --- CVE table --- */
+    .cve-id { 
+      font-weight: 700; 
+      color: #E53935;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+    }
+    
+    .cvss-score {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 10px;
+      text-align: center;
+    }
+    
+    .cvss-critical { background: #E53935; color: #FFFFFF; }
+    .cvss-high { background: #FFA726; color: #1E1E1E; }
+    .cvss-medium { background: #FFD54F; color: #1E1E1E; }
+    .cvss-low { background: #00C853; color: #FFFFFF; }
+    
+    .small { 
+      font-size: 10px; 
+      color: #AFAFAF;
+      margin-top: 4px;
+    }
+    
+    .small a {
+      color: #2196F3;
+      text-decoration: none;
+      word-break: break-all;
+    }
+    
+    .small a:hover {
+      color: #3A7EBF;
+      text-decoration: underline;
+    }
+
+    /* --- Badges --- */
+    .badge { 
+      display: inline-block; 
+      padding: 6px 12px; 
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+    
+    .badge-primary {
+      background: linear-gradient(135deg, #3A7EBF 0%, #1F538D 100%);
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(58, 126, 191, 0.4);
+    }
+    
+    .badge-success {
+      background: #00C853;
+      color: #FFFFFF;
+    }
+    
+    .badge-info {
+      background: #2196F3;
+      color: #FFFFFF;
+    }
+
+    /* --- Prediction Box --- */
+    .prediction-box {
+      background: rgba(33, 150, 243, 0.1);
+      border-left: 4px solid #2196F3;
+      padding: 12px 16px;
+      margin: 12px 0;
+      border-radius: 6px;
+      color: #E3F2FD;
+      font-size: 13px;
+    }
+
+    /* --- Label Probabilities --- */
+    .label-probs {
+      background: #1E1E1E;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #3A7EBF;
+    }
+    
+    .label-prob-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #404040;
+      color: #AFAFAF;
+      font-size: 11px;
+    }
+    
+    .label-prob-item:last-child {
+      border-bottom: none;
+    }
+    
+    .label-prob-name {
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+    
+    .label-prob-value {
+      color: #00C853;
+      font-weight: 700;
+    }
+
+    /* --- Chart --- */
+    .chart { 
+      margin: 12px 0; 
+      text-align: center;
+      background: #1E1E1E;
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid #404040;
+    }
+    
+    .chart img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    /* --- Footer --- */
+    footer { 
+      border-top: 2px solid #3A7EBF;
+      margin-top: 24px;
+      padding-top: 16px;
+      font-size: 10px;
+      color: #AFAFAF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .footer-brand {
+      font-weight: 600;
+      color: #3A7EBF;
+    }
+
+    /* --- Utility --- */
+    .muted { color: #AFAFAF; font-size: 11px; }
+    .text-danger { color: #E53935; }
+    .text-success { color: #00C853; }
+    .text-warning { color: #FFA726; }
+    .text-info { color: #2196F3; }
+
+    /* Prevent page break inside CVE rows */
+    tr { page-break-inside: avoid; }
+    .page-break { page-break-after: always; }
+    
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #AFAFAF;
+    }
+    
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <!-- Print Button -->
+  <button class="print-button" onclick="window.print()">
+    <span>🖨️</span>
+    <span>Print / Save as PDF</span>
+  </button>
+
+  <div class="page">
+    <header>
+      <div>
+        <div class="brand">🛡️ AI Vulnerability Scanner</div>
+        <div class="brand-subtitle">Automated Security Assessment Report</div>
+      </div>
+      <div class="meta">
+        <div><strong>Target:</strong> {{ scan.target or "-" }}</div>
+        <div><strong>Scan Date:</strong> {{ scan.date or "-" }}</div>
+        {% if note %}
+        <div style="margin-top:8px;">{{ note }}</div>
+        {% endif %}
+      </div>
+    </header>
+
+    <!-- Summary -->
+    <section class="summary-card">
+      <div class="summary-header">
+        <div>
+          <h2>📊 Scan Summary</h2>
+        </div>
+      </div>
+      
+      <div class="prediction-box">
+        <strong>AI Prediction:</strong> {{ scan.prediction or "No AI prediction available" }}
+      </div>
+      
+      {% if scan.cvss_score is defined %}
+        <div style="margin-top:8px; padding:8px 12px; background:#1E2B1E; border-left:3px solid #00C853; border-radius:4px;">
+          <strong>CVSS Score (Predicted):</strong> 
+          <span style="font-size:16px; font-weight:700; color:#00C853;">{{ "%.1f"|format(scan.cvss_score) }}</span>/10
+        </div>
+      {% endif %}
+      
+      <div style="margin-top:16px;">
+        <span class="badge badge-primary">🔍 CVE Matches: {{ scan.cves|length }}</span>
+        <span class="badge badge-info">🤖 Model: {{ model_name or "N/A" }}</span>
+      </div>
+
+      {% if scan.label_probs %}
+      <div style="margin-top:16px;">
+        <h3 style="font-size:12px; margin-bottom:8px;">Top Vulnerability Classifications</h3>
+        <div class="label-probs">
+          {% for k, v in scan.label_probs.items()|sort(attribute=1, reverse=true) %}
+            {% if loop.index0 < 5 %}
+              <div class="label-prob-item">
+                <span class="label-prob-name">{{ k.replace('vuln_', '').replace('_', ' ').title() }}</span>
+                <span class="label-prob-value">{{ "%.1f"|format(v * 100) }}%</span>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </section>
+
+    <div class="row">
+      <!-- Left column: CVE list -->
+      <div class="col-2">
+        <div class="card">
+          <h3>🚨 CVE Matches</h3>
+          {% if not scan.cves %}
+            <div class="empty-state">
+              <div class="empty-state-icon">✓</div>
+              <div>No CVEs found for this scan.</div>
+              <div class="small" style="margin-top:8px;">This could indicate a secure system or limited scan coverage.</div>
+            </div>
+          {% else %}
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:20%;">CVE ID</th>
+                  <th style="width:12%;">CVSS</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for c in scan.cves %}
+                  <tr>
+                    <td class="cve-id">{{ c.cve_id or c.id or c.CVE or "N/A" }}</td>
+                    <td>
+                      {% set cvss = c.cvss_v3 or c.cvss or 0 %}
+                      {% if cvss >= 9.0 %}
+                        <span class="cvss-score cvss-critical">{{ cvss }}</span>
+                      {% elif cvss >= 7.0 %}
+                        <span class="cvss-score cvss-high">{{ cvss }}</span>
+                      {% elif cvss >= 4.0 %}
+                        <span class="cvss-score cvss-medium">{{ cvss }}</span>
+                      {% else %}
+                        <span class="cvss-score cvss-low">{{ cvss or "N/A" }}</span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      <div style="color:#FFFFFF;">{{ (c.summary or "No description available")[:300] }}</div>
+                      {% if c.url %}
+                        <div class="small">🔗 <a href="{{ c.url }}" target="_blank">{{ c.url }}</a></div>
+                      {% elif c.cve_id %}
+                        <div class="small">🔗 <a href="https://nvd.nist.gov/vuln/detail/{{ c.cve_id }}" target="_blank">View on NVD</a></div>
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Right column: Features + chart -->
+      <div class="col-1">
+        <div class="card">
+          <h3>🔧 Key Features</h3>
+          {% if not scan.features %}
+            <div class="empty-state">
+              <div class="empty-state-icon">📋</div>
+              <div>No feature data available.</div>
+            </div>
+          {% else %}
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:45%;">Feature</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for k, v in scan.features.items() %}
+                  {% if loop.index0 < 40 %}
+                    <tr>
+                      <th style="background:#2B2B2B; color:#2196F3; font-weight:600;">{{ k }}</th>
+                      <td style="color:#FFFFFF;">{{ v }}</td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          {% endif %}
+        </div>
+
+        {% if chart_data %}
+        <div class="card">
+          <h3>📈 Label Probabilities Chart</h3>
+          <div class="chart">
+            <img src="data:image/png;base64,{{ chart_data }}" alt="Label probabilities visualization"/>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Attach selected raw scan outputs -->
+    {% if scan.raw_outputs %}
+      <div class="page-break"></div>
+      <section class="card">
+        <h3>📎 Attached Scan Results</h3>
+        <div class="muted" style="margin-bottom:16px;">The following raw outputs were attached to this report. Long text outputs are shown as preformatted text. Images are embedded inline.</div>
+
+        {% for out in scan.raw_outputs %}
+          <div class="card" style="margin-bottom:16px; border: 1px solid #404040;">
+            <h4 style="margin:0 0 8px 0; color:#00C853; font-size:13px; font-weight:600;">
+              {{ out.label or out.name }}
+            </h4>
+
+            {% if out.type == "text" %}
+              <div class="small muted" style="margin-bottom:8px;">📄 Source: {{ out.source or out.name }}</div>
+              <pre style="
+                white-space:pre-wrap; 
+                word-wrap:break-word; 
+                font-size:10px; 
+                font-family:'Courier New', monospace;
+                border:1px solid #404040; 
+                background:#1E1E1E;
+                color:#00C853;
+                padding:12px; 
+                max-height:400px; 
+                overflow:auto;
+                border-radius:6px;
+                line-height:1.4;
+              ">{{ out.content }}</pre>
+
+            {% elif out.type == "image" %}
+              <div class="small muted" style="margin-bottom:8px;">🖼️ Source: {{ out.source or out.name }}</div>
+              <div style="text-align:center; margin-top:8px; background:#1E1E1E; padding:12px; border-radius:6px; border:1px solid #404040;">
+                <img src="data:image/{{ out.img_format or 'png' }};base64,{{ out.content }}" 
+                     style="max-width:100%; height:auto; border-radius:4px; box-shadow:0 2px 8px rgba(0,0,0,0.4);"/>
+              </div>
+
+            {% elif out.type == "link" %}
+              <div class="small" style="margin-bottom:8px;">
+                🔗 File: <a href="{{ out.href }}" style="color:#00C853; text-decoration:none; font-weight:600;">
+                  {{ out.href_text or out.name }}
+                </a>
+              </div>
+
+            {% else %}
+              <div class="small muted">⚠️ Unknown type — providing link if available.</div>
+              {% if out.href %}
+                <div class="small" style="margin-top:4px;">
+                  <a href="{{ out.href }}" style="color:#00C853;">{{ out.href }}</a>
+                </div>
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </section>
+    {% endif %}
+
+    <footer>
+      <div style="display:flex; flex-direction:column; gap:8px; flex:1;">
+        <div class="footer-brand">🛡️ AI Vulnerability Scanner v1.0</div>
+        <div style="font-size:11px; color:#AFAFAF;">
+          Powered by Machine Learning • Automated Security Assessment Tool
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <div style="margin-bottom:4px; font-size:11px;">Generated: {{ export_time }}</div>
+        <div style="font-size:10px; color:#AFAFAF;">
+          Report ID: {{ scan.report_id or "N/A" }}
+        </div>
+      </div>
+    </footer>
+    
+    <div style="margin-top:16px; padding-top:12px; border-top:1px solid #404040; text-align:center; font-size:10px; color:#666;">
+      <div style="margin-bottom:6px;">
+        <strong style="color:#00C853;">Disclaimer:</strong> This report is generated by an automated AI-powered vulnerability scanner. 
+        Results should be verified manually by security professionals before taking action.
+      </div>
+      <div>
+        © 2024 AI Vulnerability Scanner • For authorized security assessments only • 
+        Unauthorized scanning may be illegal
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+    "features": {
+        "nikto_high_risk_findings": 0,
+        "nikto_medium_risk_findings": 0,
+        "nikto_low_risk_findings": 0,
+        "nikto_found_xss": 0,
+        "nikto_found_sqli": 0,
+        "nikto_found_trace": 0,
+        "nikto_found_misconfig": 0,
+        "nikto_found_os_filenames": 0,
+        "nikto_found_infoleak": 0
+    },
+    "labels": {
+        "vuln_sqli": 0,
+        "vuln_xss": 0,
+        "vuln_directory_traversal": 0,
+        "vuln_command_injection": 0,
+        "vuln_misconfiguration": 0,
+        "vuln_outdated_service": 0,
+        "cvss_score": 0.0
+    }
+}

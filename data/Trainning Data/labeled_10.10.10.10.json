@@ -1,0 +1,19 @@
+{
+    "features": {
+        "port_21_open": 1,
+        "port_22_open": 0,
+        "total_open_ports": 3,
+        "count_path_200": 1,
+        "path_contains_admin": 1,
+        "nikto_high_risk_findings": 0
+    },
+    "labels": {
+        "vuln_sqli": 0,
+        "vuln_xss": 0,
+        "vuln_directory_traversal": 0,
+        "vuln_command_injection": 0,
+        "vuln_misconfiguration": 0,
+        "vuln_outdated_service": 0,
+        "cvss_score": 1.5
+    }
+}

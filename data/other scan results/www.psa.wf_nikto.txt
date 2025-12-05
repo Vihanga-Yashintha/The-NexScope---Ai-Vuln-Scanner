@@ -1,0 +1,8 @@
+- Nikto v2.5.0/
++ Target Host: www.psa.wf
++ Target Port: 80
++ GET /ynj0oDma.cwr: IP address found in the 'content-security-policy-report-only' header. The IP is "1.0.1.1". See: https://portswigger.net/kb/issues/00600300_private-ip-addresses-disclosed: 
++ GET /backup.tar.bz2: The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type. See: https://www.netsparker.com/web-vulnerability-scanner/vulnerabilities/missing-content-type-header/: 
++ GET /: Uncommon header 'proxy-status' found, with contents: Cloudflare-Proxy;error=http_request_error.
++ GET /cdn-cgi/trace: Retrieved access-control-allow-origin header: *.
++ GET /cdn-cgi/trace: Cloudflare trace CGI found, which may leak some system information.

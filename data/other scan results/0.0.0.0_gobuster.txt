@@ -1,0 +1,6 @@
+/.htpasswd            (Status: 403) [Size: 272]
+/.hta                 (Status: 403) [Size: 272]
+/.htaccess            (Status: 403) [Size: 272]
+/index.html           (Status: 200) [Size: 10703]
+/javascript           (Status: 301) [Size: 307] [--> http://0.0.0.0/javascript/]
+/server-status        (Status: 200) [Size: 4042]

@@ -1,0 +1,886 @@
+[
+  {
+    "target": "10.106.11.210",
+    "status": "Completed",
+    "tools": [
+      "Nmap",
+      "Gobuster",
+      "Nikto"
+    ],
+    "date": "2025-11-28 03:49",
+    "prediction": "\ud83d\udd34 ML Model Prediction: Vulnerabilities detected - command_injection, directory_traversal, misconfiguration, outdated_service, sqli, xss (CVSS: 10.0)",
+    "features": {
+      "port_21_open": 1,
+      "port_22_open": 1,
+      "port_23_open": 1,
+      "port_25_open": 1,
+      "port_53_open": 1,
+      "port_80_open": 1,
+      "port_111_open": 1,
+      "port_139_open": 1,
+      "port_445_open": 1,
+      "port_512_open": 1,
+      "port_513_open": 1,
+      "port_514_open": 1,
+      "port_1099_open": 1,
+      "port_1524_open": 1,
+      "port_2049_open": 1,
+      "port_2121_open": 1,
+      "port_3306_open": 1,
+      "port_5432_open": 1,
+      "port_5900_open": 1,
+      "port_6000_open": 1,
+      "port_6667_open": 1,
+      "port_8009_open": 1,
+      "port_8180_open": 1,
+      "total_open_ports": 23,
+      "version_contains_old": 1,
+      "service_contains_openssh": 1,
+      "service_contains_apache": 1,
+      "service_cpes": [
+        "cpe:/a:vsftpd:vsftpd:2.3.4",
+        "cpe:/a:openbsd:openssh:4.7p1",
+        "cpe:/o:linux:linux_kernel",
+        "cpe:/a:postfix:postfix",
+        "cpe:/a:isc:bind:9.4.2",
+        "cpe:/a:apache:http_server:2.2.8",
+        "cpe:/a:samba:samba",
+        "cpe:/a:netkit:netkit",
+        "cpe:/a:netapp:data_ontap",
+        "cpe:/a:proftpd:proftpd:1.3.1",
+        "cpe:/a:mysql:mysql:5.0.51a-3ubuntu5",
+        "cpe:/a:postgresql:postgresql:8.3",
+        "cpe:/a:unrealircd:unrealircd",
+        "cpe:/a:apache:coyote_http_connector:1.1",
+        "cpe:/h:actiontec:mi424wr-gen3i",
+        "cpe:/o:linux:linux_kernel:2.4.37"
+      ],
+      "service_cpe": "cpe:/a:vsftpd:vsftpd:2.3.4 cpe:/a:openbsd:openssh:4.7p1 cpe:/o:linux:linux_kernel cpe:/a:postfix:postfix cpe:/a:isc:bind:9.4.2 cpe:/a:apache:http_server:2.2.8 cpe:/a:samba:samba cpe:/a:netkit:netkit cpe:/a:netapp:data_ontap cpe:/a:proftpd:proftpd:1.3.1 cpe:/a:mysql:mysql:5.0.51a-3ubuntu5 cpe:/a:postgresql:postgresql:8.3 cpe:/a:unrealircd:unrealircd cpe:/a:apache:coyote_http_connector:1.1 cpe:/h:actiontec:mi424wr-gen3i cpe:/o:linux:linux_kernel:2.4.37",
+      "services": [
+        {
+          "product": "vsftpd",
+          "version": "2.3.4",
+          "name": "ftp",
+          "cpe": [
+            "cpe:/a:vsftpd:vsftpd:2.3.4"
+          ],
+          "extra": {},
+          "port": "21",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": "OpenSSH",
+          "version": "4.7p1 Debian 8ubuntu1",
+          "name": "ssh",
+          "cpe": [
+            "cpe:/a:openbsd:openssh:4.7p1",
+            "cpe:/o:linux:linux_kernel"
+          ],
+          "extra": {},
+          "port": "22",
+          "protocol": "tcp",
+          "extrainfo": "protocol 2.0"
+        },
+        {
+          "product": "Linux telnetd",
+          "version": null,
+          "name": "telnet",
+          "cpe": [
+            "cpe:/o:linux:linux_kernel"
+          ],
+          "extra": {},
+          "port": "23",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": "Postfix smtpd",
+          "version": null,
+          "name": "smtp",
+          "cpe": [
+            "cpe:/a:postfix:postfix"
+          ],
+          "extra": {},
+          "port": "25",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": "ISC BIND",
+          "version": "9.4.2",
+          "name": "domain",
+          "cpe": [
+            "cpe:/a:isc:bind:9.4.2"
+          ],
+          "extra": {},
+          "port": "53",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": "Apache httpd",
+          "version": "2.2.8",
+          "name": "http",
+          "cpe": [
+            "cpe:/a:apache:http_server:2.2.8"
+          ],
+          "extra": {},
+          "port": "80",
+          "protocol": "tcp",
+          "extrainfo": "(Ubuntu) DAV/2"
+        },
+        {
+          "product": null,
+          "version": "2",
+          "name": "rpcbind",
+          "cpe": [],
+          "extra": {},
+          "port": "111",
+          "protocol": "tcp",
+          "extrainfo": "RPC #100000"
+        },
+        {
+          "product": "Samba smbd",
+          "version": "3.X - 4.X",
+          "name": "netbios-ssn",
+          "cpe": [
+            "cpe:/a:samba:samba"
+          ],
+          "extra": {},
+          "port": "139",
+          "protocol": "tcp",
+          "extrainfo": "workgroup: WORKGROUP"
+        },
+        {
+          "product": "Samba smbd",
+          "version": "3.X - 4.X",
+          "name": "netbios-ssn",
+          "cpe": [
+            "cpe:/a:samba:samba"
+          ],
+          "extra": {},
+          "port": "445",
+          "protocol": "tcp",
+          "extrainfo": "workgroup: WORKGROUP"
+        },
+        {
+          "product": "netkit-rsh rexecd",
+          "version": null,
+          "name": "exec",
+          "cpe": [
+            "cpe:/a:netkit:netkit",
+            "cpe:/o:linux:linux_kernel"
+          ],
+          "extra": {},
+          "port": "512",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": null,
+          "version": null,
+          "name": "login",
+          "cpe": [],
+          "extra": {},
+          "port": "513",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": "Netapp ONTAP rshd",
+          "version": null,
+          "name": "shell",
+          "cpe": [
+            "cpe:/a:netapp:data_ontap"
+          ],
+          "extra": {},
+          "port": "514",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": "GNU Classpath grmiregistry",
+          "version": null,
+          "name": "java-rmi",
+          "cpe": [],
+          "extra": {},
+          "port": "1099",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": "Metasploitable root shell",
+          "version": null,
+          "name": "bindshell",
+          "cpe": [],
+          "extra": {},
+          "port": "1524",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": null,
+          "version": "2-4",
+          "name": "nfs",
+          "cpe": [],
+          "extra": {},
+          "port": "2049",
+          "protocol": "tcp",
+          "extrainfo": "RPC #100003"
+        },
+        {
+          "product": "ProFTPD",
+          "version": "1.3.1",
+          "name": "ftp",
+          "cpe": [
+            "cpe:/a:proftpd:proftpd:1.3.1"
+          ],
+          "extra": {},
+          "port": "2121",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": "MySQL",
+          "version": "5.0.51a-3ubuntu5",
+          "name": "mysql",
+          "cpe": [
+            "cpe:/a:mysql:mysql:5.0.51a-3ubuntu5"
+          ],
+          "extra": {},
+          "port": "3306",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": "PostgreSQL DB",
+          "version": "8.3.0 - 8.3.7",
+          "name": "postgresql",
+          "cpe": [
+            "cpe:/a:postgresql:postgresql:8.3"
+          ],
+          "extra": {},
+          "port": "5432",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": "VNC",
+          "version": null,
+          "name": "vnc",
+          "cpe": [],
+          "extra": {},
+          "port": "5900",
+          "protocol": "tcp",
+          "extrainfo": "protocol 3.3"
+        },
+        {
+          "product": null,
+          "version": null,
+          "name": "X11",
+          "cpe": [],
+          "extra": {},
+          "port": "6000",
+          "protocol": "tcp",
+          "extrainfo": "access denied"
+        },
+        {
+          "product": "UnrealIRCd",
+          "version": null,
+          "name": "irc",
+          "cpe": [
+            "cpe:/a:unrealircd:unrealircd"
+          ],
+          "extra": {},
+          "port": "6667",
+          "protocol": "tcp",
+          "extrainfo": null
+        },
+        {
+          "product": "Apache Jserv",
+          "version": null,
+          "name": "ajp13",
+          "cpe": [],
+          "extra": {},
+          "port": "8009",
+          "protocol": "tcp",
+          "extrainfo": "Protocol v1.3"
+        },
+        {
+          "product": "Apache Tomcat/Coyote JSP engine",
+          "version": "1.1",
+          "name": "http",
+          "cpe": [
+            "cpe:/a:apache:coyote_http_connector:1.1"
+          ],
+          "extra": {},
+          "port": "8180",
+          "protocol": "tcp",
+          "extrainfo": null
+        }
+      ],
+      "nse_cve_count": 0,
+      "vuln_backdoor_detected": 0,
+      "vuln_rce_detected": 0,
+      "vuln_sqli_detected": 0,
+      "port_443_open": 0,
+      "count_path_200": 4,
+      "count_path_403": 5,
+      "count_path_500": 0,
+      "path_contains_admin": 1,
+      "path_contains_login": 0,
+      "path_contains_config": 0,
+      "path_contains_backup": 0,
+      "path_contains_api": 0,
+      "nikto_high_risk_findings": 16,
+      "nikto_medium_risk_findings": 8,
+      "nikto_low_risk_findings": 116,
+      "nikto_found_xss": 0,
+      "nikto_found_sqli": 0,
+      "nikto_found_trace": 0,
+      "nikto_found_misconfig": 0,
+      "nikto_found_os_filenames": 1,
+      "nikto_found_infoleak": 0
+    },
+    "features_file": "/home/kali/Desktop/FYP/Ai-Vuln-Scanner/data/10.106.11.210_features.json",
+    "cves": [
+      {
+        "cve_id": "CVE-2011-2523",
+        "summary": "vsftpd 2.3.4 downloaded between 20110630 and 20110703 contains a backdoor which opens a shell on port 6200/tcp.",
+        "cvss_v3": 9.8,
+        "published": "2019-11-27T21:15:12.387",
+        "modified": "2024-11-21T01:28:27.540"
+      },
+      {
+        "cve_id": "CVE-2000-1195",
+        "summary": "telnet daemon (telnetd) from the Linux netkit package before netkit-telnet-0.16 allows remote attackers to bypass authentication when telnetd is running with the -L command line option.",
+        "cvss_v3": null,
+        "published": "2001-08-31T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2020-8797",
+        "summary": "Juplink RX4-1500 v1.0.3 allows remote attackers to gain root access to the Linux subsystem via an unsanitized exec call (aka Command Line Injection), if the undocumented telnetd service is enabled and the attacker can authenticate as admin from the local network.",
+        "cvss_v3": 6.7,
+        "published": "2020-04-23T18:15:11.903",
+        "modified": "2024-11-21T05:39:27.510"
+      },
+      {
+        "cve_id": "CVE-2021-27171",
+        "summary": "An issue was discovered on FiberHome HG6245D devices through RP2613. It is possible to start a Linux telnetd as root on port 26/tcp by using the CLI interface commands of ddd and shell (or tshell).",
+        "cvss_v3": 9.8,
+        "published": "2021-02-10T19:15:15.057",
+        "modified": "2024-11-21T05:57:28.250"
+      },
+      {
+        "cve_id": "CVE-2022-39028",
+        "summary": "telnetd in GNU Inetutils through 2.3, MIT krb5-appl through 1.0.3, and derivative works has a NULL pointer dereference via 0xff 0xf7 or 0xff 0xf8. In a typical installation, the telnetd application would crash but the telnet service would remain available through inetd. However, if the telnetd application has many crashes within a short time interval, the telnet service would become unavailable after inetd logs a \"telnet/tcp server failing (looping), service terminated\" error. NOTE: MIT krb5-appl is not supported upstream but is shipped by a few Linux distributions. The affected code was removed from the supported MIT Kerberos 5 (aka krb5) product many years ago, at version 1.8.",
+        "cvss_v3": 7.5,
+        "published": "2022-08-30T05:15:08.117",
+        "modified": "2024-11-21T07:17:24.353"
+      },
+      {
+        "cve_id": "CVE-2004-0925",
+        "summary": "Postfix on Mac OS X 10.3.x through 10.3.5, with SMTPD AUTH enabled, does not properly clear the username between authentication attempts, which allows users with the longest username to prevent other valid users from being able to authenticate.",
+        "cvss_v3": null,
+        "published": "2005-01-27T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2005-0337",
+        "summary": "Postfix 2.1.3, when /proc/net/if_inet6 is not available and permit_mx_backup is enabled in smtpd_recipient_restrictions, allows remote attackers to bypass e-mail restrictions and perform mail relaying by sending mail to an IPv6 hostname.",
+        "cvss_v3": null,
+        "published": "2005-05-02T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2023-51764",
+        "summary": "Postfix through 3.8.5 allows SMTP smuggling unless configured with smtpd_data_restrictions=reject_unauth_pipelining and smtpd_discard_ehlo_keywords=chunking (or certain other options that exist in recent versions). Remote attackers can use a published exploitation technique to inject e-mail messages with a spoofed MAIL FROM address, allowing bypass of an SPF protection mechanism. This occurs because Postfix supports <LF>.<CR><LF> but some other popular e-mail servers do not. To prevent attack variants (by always disallowing <LF> without <CR>), a different solution is required, such as the smtpd_forbid_bare_newline=yes option with a Postfix minimum version of 3.5.23, 3.6.13, 3.7.9, 3.8.4, or 3.9.",
+        "cvss_v3": 5.3,
+        "published": "2023-12-24T05:15:08.273",
+        "modified": "2025-11-04T22:15:56.210"
+      },
+      {
+        "cve_id": "CVE-2024-27305",
+        "summary": "aiosmtpd is a reimplementation of the Python stdlib smtpd.py based on asyncio. aiosmtpd is vulnerable to inbound SMTP smuggling. SMTP smuggling is a novel vulnerability based on not so novel interpretation differences of the SMTP protocol. By exploiting SMTP smuggling, an attacker may send smuggle/spoof e-mails with fake sender addresses, allowing advanced phishing attacks. This issue is also existed in other SMTP software like Postfix. With the right SMTP server constellation, an attacker can send spoofed e-mails to inbound/receiving aiosmtpd instances. This issue has been addressed in version 1.4.5. Users are advised to upgrade. There are no known workarounds for this vulnerability.",
+        "cvss_v3": 5.3,
+        "published": "2024-03-12T21:15:58.630",
+        "modified": "2025-01-22T15:02:31.500"
+      },
+      {
+        "cve_id": "CVE-2008-0122",
+        "summary": "Off-by-one error in the inet_network function in libbind in ISC BIND 9.4.2 and earlier, as used in libc in FreeBSD 6.2 through 7.0-PRERELEASE, allows context-dependent attackers to cause a denial of service (crash) and possibly execute arbitrary code via crafted input that triggers memory corruption.",
+        "cvss_v3": null,
+        "published": "2008-01-16T02:00:00.000",
+        "modified": "2025-04-09T00:30:58.490"
+      },
+      {
+        "cve_id": "CVE-2008-4163",
+        "summary": "Unspecified vulnerability in ISC BIND 9.3.5-P2-W1, 9.4.2-P2-W1, and 9.5.0-P2-W1 on Windows allows remote attackers to cause a denial of service (UDP client handler termination) via unknown vectors.",
+        "cvss_v3": null,
+        "published": "2008-09-22T18:52:13.500",
+        "modified": "2025-04-09T00:30:58.490"
+      },
+      {
+        "cve_id": "CVE-2003-1070",
+        "summary": "Unknown vulnerability in rpcbind for Solaris 2.6 through 9 allows remote attackers to cause a denial of service (rpcbind crash).",
+        "cvss_v3": null,
+        "published": "2003-04-28T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-1034",
+        "summary": "Vulnerability in login in AT&T System V Release 4 allows local users to gain privileges.",
+        "cvss_v3": null,
+        "published": "1991-05-23T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-1142",
+        "summary": "SunOS 4.1.2 and earlier allows local users to gain privileges via \"LD_*\" environmental variables to certain dynamically linked setuid or setgid programs such as (1) login, (2) su, or (3) sendmail, that change the real and effective user ids to the same user.",
+        "cvss_v3": null,
+        "published": "1992-05-27T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-1215",
+        "summary": "LOGIN.EXE program in Novell Netware 4.0 and 4.01 temporarily writes user name and password information to disk, which could allow local users to gain privileges.",
+        "cvss_v3": null,
+        "published": "1993-09-16T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-1304",
+        "summary": "Vulnerability in login in SCO UNIX 4.2 and earlier allows local users to gain root access.",
+        "cvss_v3": null,
+        "published": "1994-11-30T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-0180",
+        "summary": "in.rshd allows users to login with a NULL username and execute commands.",
+        "cvss_v3": null,
+        "published": "1997-01-01T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-0036",
+        "summary": "IRIX login program with a nonzero LOCKOUT parameter allows creation or damage to files.",
+        "cvss_v3": 8.4,
+        "published": "1997-05-26T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-0028",
+        "summary": "root privileges via buffer overflow in login/scheme command on SGI IRIX systems.",
+        "cvss_v3": null,
+        "published": "1997-07-16T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-1152",
+        "summary": "Compaq/Microcom 6000 Access Integrator does not disconnect a client after a certain number of failed login attempts, which allows remote attackers to guess usernames or passwords via a brute force attack.",
+        "cvss_v3": 7.5,
+        "published": "1998-06-03T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-1434",
+        "summary": "login in Slackware Linux 3.2 through 3.5 does not properly check for an error when the /etc/group file is missing, which prevents it from dropping privileges, causing it to assign root privileges to any local user who logs on to the server.",
+        "cvss_v3": null,
+        "published": "1998-07-13T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-1558",
+        "summary": "Vulnerability in loginout in Digital OpenVMS 7.1 and earlier allows unauthorized access when external authentication is enabled.",
+        "cvss_v3": null,
+        "published": "1998-07-16T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-0159",
+        "summary": "Attackers can crash a Cisco IOS router or device, provided they can get to an interactive prompt (such as a login).  This applies to some IOS 9.x, 10.x, and 11.x releases.",
+        "cvss_v3": 3.5,
+        "published": "1998-08-12T04:00:00.000",
+        "modified": "2025-08-27T19:15:33.120"
+      },
+      {
+        "cve_id": "CVE-1999-1025",
+        "summary": "CDE screen lock program (screenlock) on Solaris 2.6 does not properly lock an unprivileged user's console session when the host is an NIS+ client, which allows others with physical access to login with any string.",
+        "cvss_v3": null,
+        "published": "1998-11-12T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-0398",
+        "summary": "In some instances of SSH 1.2.27 and 2.0.11 on Linux systems, SSH will allow users with expired accounts to login.",
+        "cvss_v3": null,
+        "published": "1999-01-01T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-0383",
+        "summary": "ACC Tigris allows public access without a login.",
+        "cvss_v3": null,
+        "published": "1999-02-02T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-1559",
+        "summary": "Xylan OmniSwitch before 3.2.6 allows remote attackers to bypass the login prompt via a CTRL-D (control d) character, which locks other users out of the switch because it only supports one session at a time.",
+        "cvss_v3": null,
+        "published": "1999-03-31T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-1029",
+        "summary": "SSH server (sshd2) before 2.0.12 does not properly record login attempts if the connection is closed before the maximum number of tries, allowing a remote attacker to guess the password without showing up in the audit logs.",
+        "cvss_v3": null,
+        "published": "1999-05-13T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-1023",
+        "summary": "useradd in Solaris 7.0 does not properly interpret certain date formats as specified in the \"-e\" (expiration date) argument, which could allow users to login after their accounts have expired.",
+        "cvss_v3": null,
+        "published": "1999-06-10T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-0901",
+        "summary": "ypserv allows a local user to modify the GECOS and login shells of other users.",
+        "cvss_v3": null,
+        "published": "1999-10-23T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-1533",
+        "summary": "Eicon Technology Diva LAN ISDN modem allows a remote attacker to cause a denial of service (hang) via a long password argument to the login.htm file in its HTTP service.",
+        "cvss_v3": null,
+        "published": "1999-11-07T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-0856",
+        "summary": "login in Slackware 7.0 allows remote attackers to identify valid users on the system by reporting an encryption error when an account is locked or does not exist.",
+        "cvss_v3": null,
+        "published": "1999-12-01T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-0991",
+        "summary": "Buffer overflow in GoodTech Telnet Server NT allows remote users to cause a denial of service via a long login name.",
+        "cvss_v3": null,
+        "published": "1999-12-06T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0361",
+        "summary": "The PPP wvdial.lxdialog script in wvdial 1.4 and earlier creates a .config file with world readable permissions, which allows a local attacker in the dialout group to access login and password information.",
+        "cvss_v3": null,
+        "published": "1999-12-14T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-1999-1324",
+        "summary": "VAXstations running Open VMS 5.3 through 5.5-2 with VMS DECwindows or MOTIF do not properly disable access to user accounts that exceed the break-in limit threshold for failed login attempts, which makes it easier for attackers to conduct brute force password guessing.",
+        "cvss_v3": 9.8,
+        "published": "1999-12-31T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0166",
+        "summary": "Buffer overflow in the InterAccess telnet server TelnetD allows remote attackers to execute commands via a long login name.",
+        "cvss_v3": null,
+        "published": "2000-02-21T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0199",
+        "summary": "When a new SQL Server is registered in Enterprise Manager for Microsoft SQL Server 7.0 and the \"Always prompt for login name and password\" option is not set, then the Enterprise Manager uses weak encryption to store the login ID and password.",
+        "cvss_v3": null,
+        "published": "2000-03-14T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0273",
+        "summary": "PCAnywhere allows remote attackers to cause a denial of service by terminating the connection before PCAnywhere provides a login prompt.",
+        "cvss_v3": null,
+        "published": "2000-04-09T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0341",
+        "summary": "ATRIUM Cassandra NNTP Server 1.10 allows remote attackers to cause a denial of service via a long login name.",
+        "cvss_v3": null,
+        "published": "2000-05-01T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0378",
+        "summary": "The pam_console PAM module in Linux systems performs a chown on various devices upon a user login, but an open file descriptor for those devices can be maintained after the user logs out, which allows that user to sniff activity on these devices when subsequent users log in.",
+        "cvss_v3": null,
+        "published": "2000-05-03T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0552",
+        "summary": "ICQwebmail client for ICQ 2000A creates a world readable temporary file during login and does not delete it, which allows local users to obtain sensitive information.",
+        "cvss_v3": 5.5,
+        "published": "2000-06-06T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0538",
+        "summary": "ColdFusion Administrator for ColdFusion 4.5.1 and earlier allows remote attackers to cause a denial of service via a long login password.",
+        "cvss_v3": null,
+        "published": "2000-06-07T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0542",
+        "summary": "Tigris remote access server before 11.5.4.22 does not properly record Radius accounting information when a user fails the initial login authentication but subsequently succeeds.",
+        "cvss_v3": null,
+        "published": "2000-06-13T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0625",
+        "summary": "NetZero 3.0 and earlier uses weak encryption for storing a user's login information, which allows a local user to decrypt the password.",
+        "cvss_v3": null,
+        "published": "2000-07-18T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0843",
+        "summary": "Buffer overflow in pam_smb and pam_ntdom pluggable authentication modules (PAM) allow remote attackers to execute arbitrary commands via a login with a long user name.",
+        "cvss_v3": null,
+        "published": "2000-11-14T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-1217",
+        "summary": "Microsoft Windows 2000 before Service Pack 2 (SP2), when running in a non-Windows 2000 domain and using NTLM authentication, and when credentials of an account are locally cached, allows local users to bypass account lockout policies and make an unlimited number of login attempts, aka the \"Domain Account Lockout\" vulnerability.",
+        "cvss_v3": null,
+        "published": "2000-11-21T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0937",
+        "summary": "Samba Web Administration Tool (SWAT) in Samba 2.0.7 does not log login attempts in which the username is correct but the password is wrong, which allows remote attackers to conduct brute force password guessing attacks.",
+        "cvss_v3": null,
+        "published": "2000-12-19T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-1149",
+        "summary": "Buffer overflow in RegAPI.DLL used by Windows NT 4.0 Terminal Server allows remote attackers to execute arbitrary commands via a long username, aka the \"Terminal Server Login Buffer Overflow\" vulnerability.",
+        "cvss_v3": null,
+        "published": "2001-01-09T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-1160",
+        "summary": "NAI Sniffer Agent allows remote attackers to cause a denial of service (crash) by sending a large number of login requests.",
+        "cvss_v3": null,
+        "published": "2001-01-09T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-1179",
+        "summary": "Netopia ISDN Router 650-ST before 4.3.5 allows remote attackers to read system logs without authentication by directly connecting to the login screen and typing certain control characters.",
+        "cvss_v3": null,
+        "published": "2001-01-09T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2001-0094",
+        "summary": "Buffer overflow in kdc_reply_cipher of libkrb (Kerberos 4 authentication library) in NetBSD 1.5 and FreeBSD 4.2 and earlier, as used in Kerberised applications such as telnetd and login, allows local users to gain root privileges.",
+        "cvss_v3": null,
+        "published": "2001-02-12T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2001-0056",
+        "summary": "The Cisco Web Management interface in routers running CBOS 2.4.1 and earlier does not log invalid logins, which allows remote attackers to guess passwords without detection.",
+        "cvss_v3": null,
+        "published": "2001-02-16T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2000-0368",
+        "summary": "Classic Cisco IOS 9.1 and later allows attackers with access to the login prompt to obtain portions of the command history of previous users, which may allow the attacker to access sensitive data.",
+        "cvss_v3": null,
+        "published": "2001-03-12T05:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2001-1425",
+        "summary": "The challenge-response authentication of the EXPERT user for Alcatel Speed Touch running firmware KHDSAA.108 and KHDSAA.132 through KHDSAA.134 allows remote attackers to gain privileges by directly computing the response based on information that is provided by the device during login.",
+        "cvss_v3": null,
+        "published": "2001-04-10T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2001-1338",
+        "summary": "Beck IPC GmbH IPC@CHIP TelnetD server generates different responses when given valid and invalid login names, which allows remote attackers to determine accounts on the system.",
+        "cvss_v3": null,
+        "published": "2001-05-24T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2001-0427",
+        "summary": "Cisco VPN 3000 series concentrators before 2.5.2(F) allow remote attackers to cause a denial of service via a flood of invalid login requests to (1) the SSL service, or (2) the telnet service, which do not properly disconnect the user after several failed login attempts.",
+        "cvss_v3": null,
+        "published": "2001-06-18T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2001-0425",
+        "summary": "AdLibrary.pm in AdCycle 0.78b allows remote attackers to gain privileges to AdCycle via a malformed Agent: header in the HTTP request, which is inserted into a resulting SQL query that is used to verify login information.",
+        "cvss_v3": null,
+        "published": "2001-06-27T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2001-0471",
+        "summary": "SSH daemon version 1 (aka SSHD-1 or SSH-1) 1.2.30 and earlier does not log repeated login attempts, which could allow remote attackers to compromise accounts without detection via a brute force attack.",
+        "cvss_v3": null,
+        "published": "2001-06-27T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2001-0395",
+        "summary": "Lightwave ConsoleServer 3200 does not disconnect users after unsuccessful login attempts, which could allow remote attackers to conduct brute force password guessing.",
+        "cvss_v3": 9.8,
+        "published": "2001-07-02T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2001-1075",
+        "summary": "poprelayd script before 2.0 in Cobalt RaQ3 servers allows remote attackers to bypass authentication for relaying by causing a \"POP login by user\" string that includes the attacker's IP address to be injected into the maillog log file.",
+        "cvss_v3": null,
+        "published": "2001-07-04T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2001-1182",
+        "summary": "Vulnerability in login in HP-UX 11.00, 11.11, and 10.20 allows restricted shell users to bypass certain security checks and gain privileges.",
+        "cvss_v3": null,
+        "published": "2001-07-17T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      },
+      {
+        "cve_id": "CVE-2001-0502",
+        "summary": "Running Windows 2000 LDAP Server over SSL, a function does not properly check the permissions of a user request when the directory principal is a domain user and the data attribute is the domain password, which allows local users to modify the login password of other users.",
+        "cvss_v3": null,
+        "published": "2001-07-21T04:00:00.000",
+        "modified": "2025-04-03T01:03:51.193"
+      }
+    ],
+    "label_probs": {
+      "is_intentionally_vulnerable": 0.0,
+      "vuln_command_injection": 0.97,
+      "vuln_directory_traversal": 0.975,
+      "vuln_misconfiguration": 0.99,
+      "vuln_outdated_service": 0.98,
+      "vuln_sqli": 0.99,
+      "vuln_xss": 0.975,
+      "waf_bypassed": 0.0
+    },
+    "labels": {
+      "is_intentionally_vulnerable": 0,
+      "vuln_command_injection": 1,
+      "vuln_directory_traversal": 1,
+      "vuln_misconfiguration": 1,
+      "vuln_outdated_service": 1,
+      "vuln_sqli": 1,
+      "vuln_xss": 1,
+      "waf_bypassed": 0
+    },
+    "cvss_score": 9.993999999999998,
+    "report_id": "SCAN-20251128-034910"
+  },
+  {
+    "target": "10.106.11.210",
+    "status": "Completed",
+    "tools": [
+      "Nmap",
+      "Gobuster",
+      "Nikto"
+    ],
+    "date": "2025-11-27 02:16",
+    "prediction": "\ud83d\udd34 ML Model Prediction: Vulnerabilities detected - command_injection, directory_traversal, misconfiguration, outdated_service, sqli, xss (CVSS: 10.0)",
+    "features_file": "/home/kali/Desktop/FYP/Ai-Vuln-Scanner/data/10.106.11.210_features.json"
+  },
+  {
+    "target": "192.168.112.132",
+    "status": "Completed",
+    "tools": [
+      "Nmap",
+      "Gobuster",
+      "Nikto"
+    ],
+    "date": "2025-11-27 01:55",
+    "prediction": "\ud83d\udd34 ML Model Prediction: Vulnerabilities detected - command_injection, directory_traversal, misconfiguration, outdated_service, sqli, xss (CVSS: 10.0)",
+    "features_file": "/home/kali/Desktop/FYP/Ai-Vuln-Scanner/data/192.168.112.132_features.json"
+  },
+  {
+    "target": "192.168.112.132",
+    "status": "Completed",
+    "tools": [
+      "Nmap",
+      "Nikto"
+    ],
+    "date": "2025-11-27 00:12",
+    "prediction": "\ud83d\udd34 ML Model Prediction: Vulnerabilities detected - command_injection, directory_traversal, misconfiguration, outdated_service, sqli, xss (CVSS: 10.0)",
+    "features_file": "/home/kali/Desktop/FYP/Ai-Vuln-Scanner/data/192.168.112.132_features.json"
+  },
+  {
+    "target": "192.168.112.132",
+    "status": "Completed",
+    "tools": [
+      "Nmap",
+      "Gobuster",
+      "Nikto"
+    ],
+    "date": "2025-11-27 00:04",
+    "prediction": "\ud83d\udd34 ML Model Prediction: Vulnerabilities detected - command_injection, directory_traversal, misconfiguration, outdated_service, sqli, xss (CVSS: 10.0)",
+    "features_file": "/home/kali/Desktop/FYP/Ai-Vuln-Scanner/data/192.168.112.132_features.json"
+  },
+  {
+    "target": "192.168.112.132",
+    "status": "Completed",
+    "tools": [
+      "Nmap",
+      "Gobuster"
+    ],
+    "date": "2025-11-26 23:41",
+    "prediction": "\ud83d\udfe2 ML Model Analysis: Low risk profile detected (CVSS: 5.2)",
+    "features_file": "/home/kali/Desktop/FYP/Ai-Vuln-Scanner/data/192.168.112.132_features.json"
+  },
+  {
+    "target": "192.168.112.132",
+    "status": "Completed",
+    "tools": [
+      "Nmap"
+    ],
+    "date": "2025-11-26 23:20",
+    "prediction": "\ud83d\udfe2 ML Model Analysis: Low risk profile detected (CVSS: 4.9)",
+    "features_file": "/home/kali/Desktop/FYP/Ai-Vuln-Scanner/data/192.168.112.132_features.json"
+  },
+  {
+    "target": "192.168.112.132",
+    "status": "Completed",
+    "tools": [
+      "Nmap",
+      "Gobuster",
+      "Nikto"
+    ],
+    "date": "2025-11-26 12:39",
+    "prediction": "\ud83d\udd34 ML Model Prediction: Vulnerabilities detected - command_injection, directory_traversal, misconfiguration, outdated_service, sqli, xss (CVSS: 10.0)",
+    "features_file": "/home/kali/Desktop/FYP/Ai-Vuln-Scanner/data/192.168.112.132_features.json"
+  }
+]

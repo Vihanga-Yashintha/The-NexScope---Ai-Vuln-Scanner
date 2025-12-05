@@ -1,0 +1,38 @@
+{
+    "features": {
+        "port_21_open": 0,
+        "port_22_open": 0,
+        "port_23_open": 0,
+        "port_80_open": 1,
+        "port_443_open": 0,
+        "port_445_open": 0,
+        "service_contains_apache": 1,
+        "service_contains_openssh": 0,
+        "version_contains_old": 0,
+        "total_open_ports": 1,
+        "critical_vuln_count": 0,
+        "high_vuln_count": 0,
+        "medium_vuln_count": 0,
+        "vuln_backdoor_detected": 0,
+        "vuln_sqli_detected": 0,
+        "vuln_rce_detected": 0,
+        "vuln_info_disclosure": 0,
+        "count_path_200": 1,
+        "count_path_403": 4,
+        "count_path_500": 0,
+        "path_contains_admin": 1,
+        "path_contains_login": 0,
+        "path_contains_config": 0,
+        "path_contains_backup": 0,
+        "path_contains_api": 0
+    },
+    "labels": {
+        "vuln_sqli": 0,
+        "vuln_xss": 0,
+        "vuln_directory_traversal": 0,
+        "vuln_command_injection": 0,
+        "vuln_misconfiguration": 0,
+        "vuln_outdated_service": 0,
+        "cvss_score": 0.1
+    }
+}
