@@ -1,81 +1,85 @@
-# AI-Powered Web Vulnerability Scanner
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Development-yellow)
 
-A Linux GUI application that runs Nmap and Gobuster scans, using an AI model to predict vulnerabilities and CVSS scores based on the results.
+# AI-Vuln-Scanner
 
-## Development Setup (For Contributors)
+AI-Vuln-Scanner is a Linux desktop GUI that orchestrates common web/network scanners (Nmap, Gobuster, Nikto), normalizes their outputs into feature vectors, and uses machine learning models to predict web application vulnerabilities and an estimated CVSS score. The project also generates HTML/PDF reports and maintains a scan history.
 
-### 1. Prerequisites
-Ensure you have the following installed on your Kali Linux system:
-- **Python 3.9+**
-- **Nmap**: `sudo apt update && sudo apt install nmap`
-- **Gobuster**: `sudo apt install gobuster`
-- **Nikto**: `sudo apt install nikto`
-- **Git**: `sudo apt install git`
+## Features
+- Run Nmap, Gobuster, Nikto (or use simulation stubs)
+- Parser modules to extract features into JSON feature vectors
+- Preprocessing: one-hot encoding for selected categorical fields, missing-value handling, StandardScaler
+- Multi-label classification (One-vs-Rest) for vuln types and regression for CVSS score
+- GUI (CustomTkinter) with Scan, History, Settings tabs
+- HTML report generation + PDF export (WeasyPrint or wkhtmltopdf)
+- Plotting utilities for confusion matrices, ROC curves and regression performance
 
-### 2. Clone the Repository
+## Requirements
+See `requirements.txt`. Use a Python 3.9+ virtual environment.
+
+## Quick start (development)
 ```bash
-git clone <your-github-repo-url>
-cd Ai-Vuln-Scanner
-```
-
-### 3. Set Up Python Virtual Environment
-```bash
-# Create the virtual environment
+# from project root
 python3 -m venv venv
-
-# Activate the environment
 source venv/bin/activate
-
-# Install required Python packages
+pip install --upgrade pip
 pip install -r requirements.txt
+
+# run GUI
+python3 gui-main-2.py
 ```
 
-### 4. How to Collect Scan Data for the AI Model
-
-We are in the data collection phase. Please use the provided engine to scan targets and generate labeled data.
-
-#### Basic Usage:
-1. **Activate the virtual environment:** `source venv/bin/activate`
-2. **Run the data collection engine:** `python3 main.py`
-3. **Enter the target IP** when prompted (e.g., `192.168.56.102` for a Metasploitable VM).
-4. The script will run Nmap and Gobuster, then save a features file (`data/<target>_features.json`).
-
-**Note:** Nikto scans can be slow (15-30 minutes per target). Please be patient. This provides crucial data for the AI model.
-
-#### Auto-Labeling Your Scan:
-After scanning a **known vulnerable target** (like Metasploitable), run the labeler script:
+## Training models
+Prepare labeled JSON files in `data/Trainning Data/` (one record per file or newline JSON). Then run:
 ```bash
-python3 utils/labeler.py data/192.168.56.102_features.json
+python3 train_models.py \
+  --data-dir "data/Trainning Data" \
+  --save-dir "models/trained" \
+  --test-size 0.2 --random-state 42 --force
 ```
-This will create a `data/labeled_192.168.56.102.json` file with both features and correct labels.
+Trained artifacts: `models/trained/` (scaler.joblib, classifier.joblib, regressor.joblib, feature_columns.json, training_report.txt).
 
-### 5. What to Scan
-- **Vulnerable VMs:** Metasploitable 2/3, OWASP Juice Shop, VulnHub machines.
-- **Clean Systems:** Modern Ubuntu servers, basic WordPress sites (to teach the model what "normal" looks like).
-- **Labeling:** For vulnerable VMs, use the `labeler.py` script. For clean systems, you will need to manually create the `labeled_*.json` file setting all `vuln_*` values to `0` and `cvss_score` to a low value.
-
-### 6. Sharing Your Data
-**Please only commit and push the `labeled_*.json` files** to the repository. Do not commit the raw `_nmap.xml`, `_gobuster.txt`, or `_features.json` files, as they are ignored by git.
-
-### Folder Structure
+## Generate performance figures
+```bash
+python3 scripts/plot_model_performance.py \
+  --models-dir ./models/trained \
+  --test-data "data/Trainning Data" \
+  --out-dir ./models/trained/figures
 ```
-Ai-Vuln-Scanner/
-├── data/               # Scan data (only labeled_*.json should be committed)
-├── src/                # Source code (nmap_parser.py, gobuster_parser.py)
-├── utils/              # Utilities (labeler.py)
-├── main.py             # Main data collection script
-├── requirements.txt    # Python dependencies
-└── README.md           # This file
+Or generate a single regression plot:
+```bash
+python3 scripts/plot_regression_performance.py \
+  --models-dir ./models/trained \
+  --test-data "data/Trainning Data" \
+  --out-dir ./models/trained/figures
 ```
 
-## Current Capabilities
-- ✅ Runs Nmap scans with version detection
-- ✅ Runs Gobuster directory scans
-- ✅ Parses results into a structured JSON feature vector
-- ✅ Auto-labels scans for known vulnerable targets
+## Report export
+- HTML is the canonical report format; convert to PDF with:
+  - WeasyPrint: `weasyprint report.html report.pdf`
+  - wkhtmltopdf: `wkhtmltopdf --enable-local-file-access report.html report.pdf`
+- The GUI uses `report_generator.py` to create HTML and invoke PDF conversion.
 
-## Next Steps
-1. Collect a large dataset of `labeled_*.json` files.
-2. Build the AI model to train on this data.
-3. Develop the PyQt5 GUI interface.
-4. Integrate the model into the GUI for predictions.
+## Data & ethics
+- Only scan authorized targets. Do not scan systems without permission.
+- Store and share only sanitized/labeled data. Raw scanner outputs may contain sensitive info.
+
+## Project layout (important files)
+- `gui-main-2.py` — GUI entrypoint
+- `models/models.py` — training pipeline, preprocessing
+- `models/predict_api.py` — prediction API used by GUI
+- `src/` — parser modules (nmap/gobuster/nikto) and helpers
+- `report_generator.py` — HTML/PDF generator
+- `scripts/` — plotting utilities
+- `data/` — scan features, labeled data, history
+- `models/trained/` — saved artifacts
+
+## Contributing
+- Create issues for bugs or feature requests.
+- Provide labeled data as `labeled_<target>.json`.
+- Run tests (if available) via `pytest`.
+
+## License
+
+This project is released under the MIT License — see the included `LICENSE` file for details.

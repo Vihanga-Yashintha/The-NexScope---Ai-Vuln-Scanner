@@ -40,3 +40,32 @@ models/
 *.h5
 *.pkl
 *.model
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+venv/
+.env
+.Python
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Data and models
+data/
+models/trained/
+*.sqlite3
+*.db
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
