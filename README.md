@@ -1,85 +1,162 @@
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Status](https://img.shields.io/badge/Status-Development-yellow)
 
-# AI-Vuln-Scanner
+# **NexScope – Web Vulnerability Scanning Toolkit (GUI + Integration + Reporting)**
 
-AI-Vuln-Scanner is a Linux desktop GUI that orchestrates common web/network scanners (Nmap, Gobuster, Nikto), normalizes their outputs into feature vectors, and uses machine learning models to predict web application vulnerabilities and an estimated CVSS score. The project also generates HTML/PDF reports and maintains a scan history.
+NexScope is a desktop-based security analysis toolkit that integrates traditional reconnaissance scanners with machine-learning–based vulnerability prediction.
+This repository represents **Part 3 of the NexScope Final Year Project**, focusing on:
 
-## Features
-- Run Nmap, Gobuster, Nikto (or use simulation stubs)
-- Parser modules to extract features into JSON feature vectors
-- Preprocessing: one-hot encoding for selected categorical fields, missing-value handling, StandardScaler
-- Multi-label classification (One-vs-Rest) for vuln types and regression for CVSS score
-- GUI (CustomTkinter) with Scan, History, Settings tabs
-- HTML report generation + PDF export (WeasyPrint or wkhtmltopdf)
-- Plotting utilities for confusion matrices, ROC curves and regression performance
+* 🌐 **Graphical User Interface (GUI)**
+* 🔗 **Module Integration (Scanner + ML Model)**
+* 📡 **Real-Time Scan Logging**
+* 📁 **Scan History Management**
+* 📄 **HTML/PDF Report Generation**
 
-## Requirements
-See `requirements.txt`. Use a Python 3.9+ virtual environment.
+NexScope provides an accessible user-facing environment to run scans, view results, store history, and generate export-ready reports.
 
-## Quick start (development)
+---
+
+## **✨ Features**
+
+### **✔ Modern Tkinter GUI**
+
+* User-friendly interface for managing scans
+* Tabs for **Scan**, **History**, **Report**, and **Settings**
+* Non-blocking execution with threading support
+
+### **✔ Full Pipeline Integration**
+
+* Connects to:
+
+  * Scanning module (Nmap, Gobuster, Nikto)
+  * Machine Learning Prediction API
+* Displays structured results and ML-generated CVSS estimates
+
+### **✔ Real-Time Logs**
+
+* Live terminal-style output feed
+* Time-stamped logs for scanner and ML events
+
+### **✔ Report Generation (HTML & PDF)**
+
+* Automatic creation of detailed vulnerability reports
+* Includes:
+
+  * Target metadata
+  * Scanner results
+  * Extracted features
+  * Predicted vulnerabilities
+  * CVSS score
+* Export using **WeasyPrint** or **wkhtmltopdf**
+
+### **✔ Scan History Management**
+
+* Saves every scan with timestamp + structured JSON
+* View, reload, and re-export past results
+
+---
+
+## **📦 Installation**
+
+### **Requirements**
+
+* Python **3.9+**
+* Linux recommended (Tkinter, WeasyPrint compatibility)
+* Tool dependencies listed in `requirements.txt`
+
+### **Setup**
+
 ```bash
-# from project root
+git clone https://github.com/<your-username>/NexScope.git
+cd NexScope
+
 python3 -m venv venv
 source venv/bin/activate
+
 pip install --upgrade pip
 pip install -r requirements.txt
-
-# run GUI
-python3 gui-main-2.py
 ```
 
-## Training models
-Prepare labeled JSON files in `data/Trainning Data/` (one record per file or newline JSON). Then run:
+---
+
+## **🚀 Run the Application**
+
 ```bash
-python3 train_models.py \
-  --data-dir "data/Trainning Data" \
-  --save-dir "models/trained" \
-  --test-size 0.2 --random-state 42 --force
+python3 nexscope_gui.py
 ```
-Trained artifacts: `models/trained/` (scaler.joblib, classifier.joblib, regressor.joblib, feature_columns.json, training_report.txt).
 
-## Generate performance figures
+Before running the GUI, ensure:
+
+* The Scanner Module (Part 1) is installed and reachable
+* The ML Prediction API (Part 2) is running or properly configured
+
+---
+
+## **📁 Project Structure**
+
+```
+NexScope/
+│
+├── gui/
+│   ├── nexscope_gui.py        # Main application entrypoint
+│   ├── components/            # Reusable UI components
+│   ├── styles/                # Theme, color schemes
+│   └── utils/                 # Threading, logs, validation helpers
+│
+├── integration/
+│   ├── scan_controller.py     # Controls scanner execution
+│   └── api_connector.py       # Connects to ML prediction API
+│
+├── reporting/
+│   ├── report_generator.py    # HTML & PDF generator
+│   ├── templates/             # HTML templates
+│   └── assets/                # CSS, icons, images
+│
+└── history/
+    ├── history_manager.py     # Scan storage & retrieval
+    └── records/               # Saved scan results
+```
+
+---
+
+## **📝 Report Generation**
+
+### Generate HTML Report
+
 ```bash
-python3 scripts/plot_model_performance.py \
-  --models-dir ./models/trained \
-  --test-data "data/Trainning Data" \
-  --out-dir ./models/trained/figures
+python3 report_generator.py --input results.json --out report.html
 ```
-Or generate a single regression plot:
+
+### Convert HTML to PDF
+
+Using WeasyPrint:
+
 ```bash
-python3 scripts/plot_regression_performance.py \
-  --models-dir ./models/trained \
-  --test-data "data/Trainning Data" \
-  --out-dir ./models/trained/figures
+weasyprint report.html report.pdf
 ```
 
-## Report export
-- HTML is the canonical report format; convert to PDF with:
-  - WeasyPrint: `weasyprint report.html report.pdf`
-  - wkhtmltopdf: `wkhtmltopdf --enable-local-file-access report.html report.pdf`
-- The GUI uses `report_generator.py` to create HTML and invoke PDF conversion.
+Using wkhtmltopdf:
 
-## Data & ethics
-- Only scan authorized targets. Do not scan systems without permission.
-- Store and share only sanitized/labeled data. Raw scanner outputs may contain sensitive info.
+```bash
+wkhtmltopdf --enable-local-file-access report.html report.pdf
+```
 
-## Project layout (important files)
-- `gui-main-2.py` — GUI entrypoint
-- `models/models.py` — training pipeline, preprocessing
-- `models/predict_api.py` — prediction API used by GUI
-- `src/` — parser modules (nmap/gobuster/nikto) and helpers
-- `report_generator.py` — HTML/PDF generator
-- `scripts/` — plotting utilities
-- `data/` — scan features, labeled data, history
-- `models/trained/` — saved artifacts
+The GUI automates both steps after each scan.
 
-## Contributing
-- Create issues for bugs or feature requests.
-- Provide labeled data as `labeled_<target>.json`.
-- Run tests (if available) via `pytest`.
+---
 
-## License
+## **⚠️ Ethical Usage**
 
-This project is released under the MIT License — see the included `LICENSE` file for details.
+NexScope is a security research tool.
+You **must** follow these ethical guidelines:
+
+* Only scan systems you **own** or have **explicit authorization** to test
+* Do not distribute sensitive scanner output
+* Misuse of this tool for illegal hacking is strictly prohibited
+
+---
+
+## **📜 License**
+
+Released under the **MIT License**.
+See `LICENSE` for details.
+
+---
